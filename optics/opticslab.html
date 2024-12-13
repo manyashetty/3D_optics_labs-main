@@ -22,6 +22,7 @@
         <button id="b1">Adjust post height</button>
         <button id="b2">Rotate postholder</button>
         <button id="b3">Tilt mirror</button>
+        <button id="connect-bluetooth">Connect Bluetooth</button>
     </div>
 
 
@@ -202,6 +203,41 @@
         gui2.onFinishChange(function (value) {
             snap = value;
         });
+
+        // Bluetooth connection setup
+let bluetoothValue = 0; // Variable to store the received value
+const connectButton = document.querySelector('#connect-bluetooth');
+
+async function connectBluetooth() {
+    try {
+        const device = await navigator.bluetooth.requestDevice({
+            acceptAllDevices: true,
+            optionalServices: ['battery_service'] // Replace with the correct service UUID
+        });
+
+        const server = await device.gatt.connect();
+        const service = await server.getPrimaryService('battery_service'); // Replace with the correct service UUID
+        const characteristic = await service.getCharacteristic('battery_level'); // Replace with the correct characteristic UUID
+
+        characteristic.addEventListener('characteristicvaluechanged', (event) => {
+            const value = new TextDecoder().decode(event.target.value);
+            bluetoothValue = parseFloat(value); // Convert to a numeric value
+            console.log('Received Bluetooth value:', bluetoothValue);
+
+            // Update the laser position or other elements dynamically
+            laser.position.x = bluetoothValue; // Example: Update laser position
+            render(); // Re-render the scene
+        });
+
+        await characteristic.startNotifications();
+        console.log('Bluetooth connected and notifications started.');
+    } catch (error) {
+        console.error('Bluetooth connection failed:', error);
+    }
+}
+
+connectButton.addEventListener('click', connectBluetooth);
+
     </script>
 </body>
 
