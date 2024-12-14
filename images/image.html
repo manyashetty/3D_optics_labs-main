@@ -19,6 +19,7 @@
     <canvas id="can1"></canvas>
     <div id="div1">
         <button id="b0">Hide text</button>
+        <button id="connect-bluetooth">Connect Bluetooth</button>
     </div>
 
     <div id="div2">
@@ -211,6 +212,8 @@
             renderer.render(scene, camera);
         }
 
+        
+
         gui1.onFinishChange(function (value) {
             beamradius = 1 * value;
             let ringnew = new THREE.RingGeometry(beamradius, 1.4, 16);
@@ -298,6 +301,53 @@
             }
         }
 
+// Bluetooth connection setup
+let bluetoothValue = 0; // Variable to store the received value
+// Bluetooth connection setup for joystick
+const connectButton = document.querySelector('#connect-bluetooth');
+
+async function connectBluetooth() {
+    try {
+        const device = await navigator.bluetooth.requestDevice({
+            acceptAllDevices: true,
+            optionalServices: ['4fafc201-1fb5-459e-8fcc-c5c9c331914b'] // Replace with your joystick service UUID
+        });
+
+        const server = await device.gatt.connect();
+        const service = await server.getPrimaryService('4fafc201-1fb5-459e-8fcc-c5c9c331914b'); // Replace with your joystick service UUID
+        const characteristic = await service.getCharacteristic('beb5483e-36e1-4688-b7f5-ea07361b26a8'); // Replace with joystick data characteristic UUID
+
+        characteristic.addEventListener('characteristicvaluechanged', (event) => {
+            try {
+                const value = new TextDecoder().decode(event.target.value);
+                
+                // Parse the incoming value as JSON
+                const joystickData = JSON.parse(value);
+
+                // Log and use the data
+                console.log('Joystick Data:', joystickData);
+
+                
+                if (joystickData && joystickData.x !== undefined && joystickData.y !== undefined) {
+                   // holder.position.x = joystickData.x*0.1;  // Adjust as needed
+                    //holder.position.y = joystickData.y*0.1;  // Adjust as needed
+                    
+                    render();  // Re-render the scene
+                }
+            } catch (error) {
+                console.error('Error parsing joystick data:', error);
+            }
+        });
+
+        await characteristic.startNotifications();
+        console.log('Joystick Bluetooth connected and notifications started.');
+    } catch (error) {
+        console.error('Bluetooth connection failed:', error);
+    }
+}
+
+// Attach event listener to the connect button
+connectButton.addEventListener('click', connectBluetooth);
 
     </script>
 </body>
