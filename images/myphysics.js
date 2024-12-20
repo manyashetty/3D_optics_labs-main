@@ -193,7 +193,7 @@ function rays1() {
         }
 
         function makeInstance(i, j) {
-            let col = "rgba(" + 255 + "," + 255 + "," + 0 + ", " + b + ")";
+            let col = "rgba(" + 255 + "," + 184 + "," + 135 + ", " + b + ")";
             ctx1.fillStyle = col;
             ctx1.fillRect(i, j, 1, 1)
         }

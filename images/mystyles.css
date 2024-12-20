@@ -8,6 +8,7 @@
   width: 100vw;
   height: 100vh;
   display: block;
+  background-color: rgb(154, 124, 17);
 }
 
 #div1 {
@@ -15,7 +16,8 @@
   top: 102px;
   right: 16px;
   width: 244px;
-  height: 24 background-color: white;
+  height: 244px ;
+  background-color: white;
 }
 
 #div2 {
@@ -23,7 +25,7 @@
   top: 126px;
   right: 16px;
   width: 244px;
-  background-color: #deb887;
+  background-color: #815112;
 }
 
 h3 {

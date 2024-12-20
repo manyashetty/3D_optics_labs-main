@@ -2,7 +2,7 @@
 //materials
 const mat0 = new THREE.MeshBasicMaterial({ color: "black", side: THREE.DoubleSide });
 const mat00 = new THREE.MeshBasicMaterial({ color: "black" });
-const mat1 = new THREE.MeshBasicMaterial({ color: 0x25383c }); //postholder outside color
+const mat1 = new THREE.MeshBasicMaterial({ color: 0x122d33 }); //postholder outside color
 const mat2 = new THREE.MeshBasicMaterial({ color: 0x4863a0, side: THREE.DoubleSide });  //bluegray
 const mat3 = new THREE.MeshBasicMaterial({ color: "red" });
 const mat4 = new THREE.MeshBasicMaterial({ color: 0xbcc6cc }); // postcolor
@@ -16,7 +16,6 @@ const mat10 = new THREE.MeshBasicMaterial({ color: 0xc9dbdc, transparent: true, 
 let rotate = false;  //should the mouse rotate the view or drag the object?
 let dragItem, dragItem0, dragItem1, dragItem2;  //the object to be dragged
 let active;  //element selected by the mouse
-let intersects;  //the objects intersected by raycaster
 let dragging = false;  // is an object being dragged?
 let deltax, deltaz, deltay;  //difference in the world coordinates of the object and the intersection point
 let startX, startY, prevX, prevY;  //used for determining the rotation direction

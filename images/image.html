@@ -12,6 +12,39 @@
     <script src="partsfunctions.js"></script>
     <script src="mousefunctions.js"></script>
     <script src="myphysics.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        #div1 {
+            /*position: absolute;*/
+            top: 160px; /* Adjusted to avoid overlap with #div2 */
+            right: 16px;
+            width: 244px;
+            padding: 5px; /* Added padding for better spacing */
+            background-color: white;
+            z-index: 2; /* Ensures this div is above #div2 */
+            border: 1px solid #ccc; /* Optional: for better visibility */
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Optional: add some shadow */
+        }
+
+        #div2 {
+            position: absolute;
+            top: 280px; /* Adjusted to ensure it doesn't overlap with #div1 */
+            right: 16px;
+            width: 244px;
+            padding: 8px; /* Added padding for better spacing */
+            background-color: #73470c;
+            z-index: 1; /* Ensures this div is below #div1 */
+            border: 1px solid #ccc; /* Optional: for better visibility */
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Optional: add some shadow */
+        }
+
+        
+    </style>
 </head>
 
 <body>
@@ -20,11 +53,14 @@
     <div id="div1">
         <button id="b0">Hide text</button>
         <button id="connect-bluetooth">Connect Bluetooth</button>
+        <button id="camera-rotate-btn">Camera Rotate</button>
+    <button id="holder-drag-btn">Drag Holder</button>
+    <button id="lens-drag-btn">Drag Lens</button>
     </div>
 
     <div id="div2">
-        <h3>Single lens image formation<br>
-            and point aberrations</h3>
+        <h5>Single lens image formation<br>
+            and point aberrations</h5>
         <p>Lens #0: no lens<br>
             Lens #1: bi-convex lens 1<br>
             Lens #2: plano-convex lens 2,<br>
@@ -42,7 +78,8 @@
         </p>
     </div>
 
-    <script>
+    <script >
+
         "use strict";
         //a toggle button
         let button = document.querySelector('#b0');
@@ -60,6 +97,7 @@
 
         //set up a scene
         const canvas = document.querySelector('#can1');
+        
 
         //set up the gui controls
         let beamradius = 0.5;
@@ -306,6 +344,23 @@ let bluetoothValue = 0; // Variable to store the received value
 // Bluetooth connection setup for joystick
 const connectButton = document.querySelector('#connect-bluetooth');
 
+document.getElementById('camera-rotate-btn').addEventListener('click', () => {
+    setInteractionMode(InteractionMode.CAMERA_ROTATE);
+});
+
+document.getElementById('holder-drag-btn').addEventListener('click', () => {
+    // Optionally, you can specify which holder to drag
+    setInteractionMode(InteractionMode.HOLDER_DRAG, 0);  // Drag the first holder
+});
+
+document.getElementById('lens-drag-btn').addEventListener('click', () => {
+    setInteractionMode(InteractionMode.LENS_DRAG);
+});
+
+
+    
+
+
 async function connectBluetooth() {
     try {
         const device = await navigator.bluetooth.requestDevice({
@@ -326,14 +381,26 @@ async function connectBluetooth() {
 
                 // Log and use the data
                 console.log('Joystick Data:', joystickData);
-
-                
                 if (joystickData && joystickData.x !== undefined && joystickData.y !== undefined) {
+                    // Adjust holder position based on joystick input
+                    if (activeHolderIndex !== null) {
+                        const newX = joystickData.x * 0.1;  // Scale factor for movement
+                        const newZ = joystickData.y * 0.1;  // Use y for z-axis movement
+                        
+                        const currentHolder = holder.children[activeHolderIndex];
+                        currentHolder.position.x = newX;
+                        currentHolder.position.z = newZ;
+                        
+                        render();
+                        rays1();
+                    }
+                }
+                //if (joystickData && joystickData.x !== undefined && joystickData.y !== undefined) {
                    // holder.position.x = joystickData.x*0.1;  // Adjust as needed
                     //holder.position.y = joystickData.y*0.1;  // Adjust as needed
                     
-                    render();  // Re-render the scene
-                }
+                   // render();  // Re-render the scene
+                //}
             } catch (error) {
                 console.error('Error parsing joystick data:', error);
             }

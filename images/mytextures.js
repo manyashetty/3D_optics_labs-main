@@ -96,7 +96,7 @@ function makeLamptexture() {
 
     }
     for (let i = -1; i < 2; i++) {
-        ctxlamp.fillStyle = "#ffff00";
+        ctxlamp.fillStyle = "#fff100";
         ctxlamp.beginPath();
         ctxlamp.arc(i / 4 * 32 + 32, 32 - 3 / 4 * 32, 3, 0, 2 * Math.PI);
         ctxlamp.fill();
