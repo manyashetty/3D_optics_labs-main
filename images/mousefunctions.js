@@ -67,6 +67,7 @@ function mouseDownFunc(x, y) {
     if (intersects.length === 0) {
         return false;
     }
+    //------------------------------------
     // let item = intersects[0];
     // let objectHit = item.object;
     // dragItem = dragItem0 = dragItem1 = dragItem2 = objectHit;
@@ -100,7 +101,7 @@ function mouseDownFunc(x, y) {
     //             active = i;
     //         }
     //     }
-
+//------------------------------------
     let objectHit = intersects[0].object;
     
     // Check if we're dragging a specific holder or lens
@@ -278,3 +279,9 @@ function doMouseUp() {
 //         rotate = false;
 //     }
 // }
+
+
+
+
+
+//-------------------------- 

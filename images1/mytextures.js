@@ -77,26 +77,26 @@ function makeLamptexture() {
     ctxlamp.fillRect(0, 0, canv.width, canv.height);
 
     for (let i = -2; i < 3; i++) {
-        ctxlamp.fillStyle = "#ff7700";
+        ctxlamp.fillStyle = "#ffff00";
         ctxlamp.beginPath();
         ctxlamp.arc(i / 4 * 32 + 32, 32, 3, 0, 2 * Math.PI);
         ctxlamp.fill();
     }
     for (let i = -2; i < 3; i++) {
-        ctxlamp.fillStyle = "#ff7700";
+        ctxlamp.fillStyle = "#ffff00";
         ctxlamp.beginPath();
         ctxlamp.arc(32, 32 - i / 4 * 32, 3, 0, 2 * Math.PI);
         ctxlamp.fill();
     }
     for (let i = -1; i < 2; i++) {
-        ctxlamp.fillStyle = "#ff7700";
+        ctxlamp.fillStyle = "#ffff00";
         ctxlamp.beginPath();
         ctxlamp.arc(3 / 4 * 32 + 32, 32 - i / 4 * 32, 3, 0, 2 * Math.PI);
         ctxlamp.fill();
 
     }
     for (let i = -1; i < 2; i++) {
-        ctxlamp.fillStyle = "#fff100";
+        ctxlamp.fillStyle = "#ffff00";
         ctxlamp.beginPath();
         ctxlamp.arc(i / 4 * 32 + 32, 32 - 3 / 4 * 32, 3, 0, 2 * Math.PI);
         ctxlamp.fill();

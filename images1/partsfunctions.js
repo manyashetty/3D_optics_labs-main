@@ -25,14 +25,14 @@ function makeBoard() {
 
 function makeTable() {
     const geometry = new THREE.PlaneGeometry(26, 60);
-    const mat = new THREE.MeshBasicMaterial({ color: 0xa10d21 });
+    const mat = new THREE.MeshBasicMaterial({ color: 0x4d3319 });
     const tablemesh = new THREE.Mesh(geometry, mat);
     return tablemesh;
 }
 
 function makeHolderblock() {
     const geometry = new THREE.BoxGeometry(2, 2, 24);
-    const mat = new THREE.MeshBasicMaterial({ color: 0xcc3608 });
+    const mat = new THREE.MeshBasicMaterial({ color: 0xc68c53 });
     const box = new THREE.Mesh(geometry, mat);
     const cgeometry = new THREE.CircleGeometry(0.3, 32);
     const circle1 = new THREE.Mesh(cgeometry, mat0);
@@ -156,7 +156,7 @@ function makeScreenholder() {
     post0.position.y = 2;  //the post is 3.2 units high and its bottom is at y = 0.4
     post0.updateMatrix();
     singleGeometry.merge(post0.geometry, post0.matrix);
-    const holdermaterial = new THREE.MeshBasicMaterial({ color: 0x0f4780 });
+    const holdermaterial = new THREE.MeshBasicMaterial({ color: 0x708090 });
     const postmesh = new THREE.Mesh(singleGeometry, holdermaterial);
     return postmesh;
 }

@@ -1,7 +1,7 @@
 ﻿"use strict";
 function rays1() {
     //clear the screen
-    ctx1.fillStyle = "#374d63";
+    ctx1.fillStyle = "#708090";
     ctx1.fillRect(0, 0, canv1.width, canv1.height);
     ctx1.beginPath();
     ctx1.strokeStyle = "black";
@@ -14,7 +14,7 @@ function rays1() {
     render();
 
     if (lensID == 0) {
-        ctx1.fillStyle = "#3e6082";
+        ctx1.fillStyle = "#708090";
         ctx1.fillRect(0, 0, canv1.width, canv1.height);
         ctx1.beginPath();
         ctx1.strokeStyle = "black";
@@ -193,7 +193,7 @@ function rays1() {
         }
 
         function makeInstance(i, j) {
-            let col = "rgba(" + 195 + "," + 155 + "," + 39 + ", " + b + ")";
+            let col = "rgba(" + 255 + "," + 255 + "," + 0 + ", " + b + ")";
             ctx1.fillStyle = col;
             ctx1.fillRect(i, j, 1, 1)
         }
